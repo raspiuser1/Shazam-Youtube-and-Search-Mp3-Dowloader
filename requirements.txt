@@ -1,0 +1,7 @@
+beautifulsoup4==4.11.1
+python-dotenv==0.20.0
+requests==2.22.0
+requests_html==0.10.0
+telepotpro==13.3
+youtube_dl==2021.12.17
+youtube_search_python==1.6.5
