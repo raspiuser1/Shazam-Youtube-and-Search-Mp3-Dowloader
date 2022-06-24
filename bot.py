@@ -131,6 +131,7 @@ class Chat:
             yturl = yturl.replace("*", "\\*")  
             yturl = yturl.replace("[", "\\[")
             yturl = yturl.replace("|", "")
+            yturl = yturl.replace("#", "")
             yturl = yturl.replace("`", "\\`")
             return yturl
         
@@ -223,6 +224,8 @@ class Chat:
                   video_url = info_dict.get("url", None)
                   video_id = info_dict.get("id", None)
                   video_title = info_dict.get('title', None)
+                  video_title = self.escapechar(video_title)                       
+
                   #print(video_title)
             getlink = httplink
             file_name = video_title + '.mp3'
