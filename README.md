@@ -6,6 +6,7 @@ Youtube link: https://youtu.be/gY6uuyXsDUs <br />
 Clone this repo and rename the env file to .env and put yout bot token in it<br />
 you can get a bot token by talking to the @botfather on telegram <br />
 
+run `pip install -r requirements.txt`
 
 start your bot with  `python3 bot.py` . 
 Type `/help` for the menu, you can paste youtube, Spotify links or share your found shazam with the bot. 
