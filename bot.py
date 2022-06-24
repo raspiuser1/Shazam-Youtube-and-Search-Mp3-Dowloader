@@ -74,7 +74,8 @@ class Chat:
             'start':'🤖>====== Download Options ======<🤖\n'
                     '1) Paste youtube links\n'
                     '2) Paste Shazam links\n'
-                    '3) /m [Song name] or [Artist - Song name]\nReturns 1 song\n\n'
+                    '3) Paste spotify link\n'
+                    '4) /m [Song name] or [Artist - Song name]\nReturns 1 song\n\n'
                     '🤖>====== Search & Download =====<🤖\n'
                     '/s [-nr] - Search song/artist\n10 results will be displayed if [-nr] not specified\n\n'
                     '/d [nr] - Download Number from searchlist, see /s\n\n'
@@ -169,9 +170,11 @@ class Chat:
             return
         
         if user_input.startswith('/restart'):
+            self.send_message(f"restarting the Bot")
             cmd = subprocess.Popen(f'restart.sh',
                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, err = cmd.communicate()
+            
             return
         
         if user_input.startswith('/c'):
@@ -224,6 +227,32 @@ class Chat:
             getlink = httplink
             file_name = video_title + '.mp3'
             
+        elif "open.spotify.com" in user_input:
+            yturl = ""
+            httplink = str(re.search("(?P<url>https?://[^\s]+)", user_input).group("url"))
+            print(httplink)
+            fol = "/usr/bin/python3 " + os.getcwd() + "/spotify.py " +httplink
+            cmd2 = subprocess.Popen(fol,stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            out1, err = cmd2.communicate()            
+            for line in out1.decode().splitlines():
+                        print(line)
+                        line = line.replace("'", "")
+                        #line = line.replace(" ", "")
+                        line = line.replace("(", "")
+                        line = line.replace(")", "")
+                        line1 = line.split(",")
+                        name = line1[1]
+                        print(name)
+                        artist = line1[0]
+                        print(artist)
+            comp = artist + " - " + name
+            self.send_message(str(comp))
+            file_name = comp + '.mp3'
+            file_name = file_name.replace('"', '')
+            result = Music.search_music(self, comp)               
+            self.send_message(f"🎵 {Music.get_title(self, result)}\n🔗 {Music.get_link(self, result)}")
+            downloading_message = self.send_message('⬇️ Downloading... \n_(this may take a while.)_')
+            getlink = Music.get_link(self, result)
             
         elif "shazam.com" in user_input:
             yturl = ""
@@ -397,8 +426,9 @@ class Chat:
             self.send_message(self.messages['start'])
 
         elif (user_input.startswith('/') or
-              "youtu.be" in user_input or "youtube.com" in user_input or
-              "shazam.com" in user_input):             
+              "youtu.be" in user_input or "youtube.com" in user_input
+              or "open.spotify.com" in user_input
+              or "shazam.com" in user_input):             
             self.process_request(user_input)
  
 
