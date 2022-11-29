@@ -1,7 +1,7 @@
 # Shazam, Spotify, Youtube and mp3 search downloader Telegram bot<br />
 
-Youtube link: https://youtu.be/q-iPqDckqIs <br />
-[![IMAGE VIDEO](https://img.youtube.com/vi/q-iPqDckqIs/0.jpg)](https://www.youtube.com/watch?v=q-iPqDckqIs)<br />
+Youtube link: https://youtu.be/gY6uuyXsDUs <br />
+[![IMAGE VIDEO](https://img.youtube.com/vi/gY6uuyXsDUs/0.jpg)](https://www.youtube.com/watch?v=gY6uuyXsDUs)<br />
 
 Clone this repo and rename the env file to .env and put yout bot token in it<br />
 you can get a bot token by talking to the @botfather on telegram <br />
